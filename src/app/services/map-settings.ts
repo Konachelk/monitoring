@@ -13,12 +13,12 @@ export const initMapOptions: MapOptions = {
   maxBoundsViscosity: 1.0,
   bounceAtZoomLimits: true,
   scrollWheelZoom: true,
-  preferCanvas: true
+  preferCanvas: true,
 };
 export const tileLayerOptions: TileLayerOptions  = {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   subdomains: ['a', 'b', 'c'],
   bounds,
   noWrap: true,
-  detectRetina: true
+  detectRetina: true,
 };

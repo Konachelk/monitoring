@@ -3,16 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MapService } from './services/map.service';
+import { ApiService } from './services/api.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [
-    MapService
+    MapService,
+    ApiService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

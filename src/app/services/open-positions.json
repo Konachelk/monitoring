@@ -1,0 +1,727 @@
+[
+  {
+    "timeStamp": "2021-11-28T16:48:08Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 5,
+    "mmsi": 257004500,
+    "cog": null,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.361968,
+        63.432865
+      ]
+    },
+    "shipType": 30,
+    "name": "AUKNES",
+    "imo": null,
+    "callsign": "LG5385",
+    "country": "Norge",
+    "eta": "2019-01-01T00:00:00",
+    "destination": "VHF CH 16",
+    "isSurvey": false,
+    "heading": null,
+    "draught": null,
+    "a": null,
+    "b": null,
+    "c": null,
+    "d": null
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:26Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 258824000,
+    "cog": 350,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.352308,
+        63.437053
+      ]
+    },
+    "shipType": 70,
+    "name": "NYSTEIN",
+    "imo": 9137284,
+    "callsign": "LEDQ",
+    "country": "Norge",
+    "eta": "2021-11-27T06:00:00",
+    "destination": "TRONDHEIM",
+    "isSurvey": false,
+    "heading": 1,
+    "draught": 5,
+    "a": 67,
+    "b": 16,
+    "c": 6,
+    "d": 5
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:42Z",
+    "sog": 12.3,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 257057980,
+    "cog": 149.5,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.173962,
+        63.476115
+      ]
+    },
+    "shipType": 69,
+    "name": "MUNKEN",
+    "imo": 9820403,
+    "callsign": "LESN",
+    "country": "Norge",
+    "eta": "2021-12-31T23:59:00",
+    "destination": "FLAKK - RORVIK",
+    "isSurvey": false,
+    "heading": 148,
+    "draught": 4,
+    "a": 54,
+    "b": 54,
+    "c": 9,
+    "d": 9
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:51Z",
+    "sog": 12.4,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 257057960,
+    "cog": 335.7,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.173928,
+        63.485697
+      ]
+    },
+    "shipType": 69,
+    "name": "LAGATUN",
+    "imo": 9820398,
+    "callsign": "LESQ",
+    "country": "Norge",
+    "eta": null,
+    "destination": "0",
+    "isSurvey": false,
+    "heading": 339,
+    "draught": 4.5,
+    "a": 54,
+    "b": 54,
+    "c": 9,
+    "d": 9
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:10Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 0,
+    "mmsi": 257508700,
+    "cog": null,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.411033,
+        63.438467
+      ]
+    },
+    "shipType": 51,
+    "name": "RESCUE TRONDHEIM SAR",
+    "imo": null,
+    "callsign": "LF5415",
+    "country": "Norge",
+    "eta": null,
+    "destination": "TEL +47-91112998",
+    "isSurvey": false,
+    "heading": null,
+    "draught": 0.9,
+    "a": 6,
+    "b": 2,
+    "c": 2,
+    "d": 1
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:30Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 5,
+    "mmsi": 258342000,
+    "cog": 264.1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.409043,
+        63.438437
+      ]
+    },
+    "shipType": 90,
+    "name": "GUNNERUS",
+    "imo": 9371361,
+    "callsign": "LNVZ",
+    "country": "Norge",
+    "eta": "2021-11-09T18:00:00",
+    "destination": "TRONDHEIM",
+    "isSurvey": false,
+    "heading": 201,
+    "draught": 3.7,
+    "a": 15,
+    "b": 21,
+    "c": 4,
+    "d": 4
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:57Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 5,
+    "mmsi": 257256400,
+    "cog": 100.1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.409685,
+        63.439083
+      ]
+    },
+    "shipType": 60,
+    "name": "FOSEN",
+    "imo": 8808496,
+    "callsign": "LASY",
+    "country": "Norge",
+    "eta": null,
+    "destination": "FLAKK()RORVIK",
+    "isSurvey": false,
+    "heading": 22,
+    "draught": 4.2,
+    "a": 43,
+    "b": 43,
+    "c": 7,
+    "d": 8
+  },
+  {
+    "timeStamp": "2021-11-29T13:12:07Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 5,
+    "mmsi": 257072900,
+    "cog": null,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.417848,
+        63.441267
+      ]
+    },
+    "shipType": 52,
+    "name": "MUNKHOLMEN II",
+    "imo": null,
+    "callsign": "LM6511",
+    "country": "Norge",
+    "eta": "2021-01-15T15:00:00",
+    "destination": "TRONDHEIM",
+    "isSurvey": false,
+    "heading": null,
+    "draught": 3,
+    "a": 6,
+    "b": 8,
+    "c": 1,
+    "d": 5
+  },
+  {
+    "timeStamp": "2021-11-29T13:12:09Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 258434000,
+    "cog": 220.1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.41207,
+        63.441963
+      ]
+    },
+    "shipType": 70,
+    "name": "VARGOEY",
+    "imo": 7325564,
+    "callsign": "LMEU",
+    "country": "Norge",
+    "eta": "2021-07-01T14:00:00",
+    "destination": "TLF 41606130",
+    "isSurvey": false,
+    "heading": 200,
+    "draught": 6.9,
+    "a": 8,
+    "b": 47,
+    "c": 5,
+    "d": 6
+  },
+  {
+    "timeStamp": "2021-11-29T13:09:49Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 5,
+    "mmsi": 311000987,
+    "cog": 237.3,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.398747,
+        63.44123
+      ]
+    },
+    "shipType": 60,
+    "name": "BOREALIS",
+    "imo": 9122552,
+    "callsign": "C6ES4",
+    "country": "Bahamas",
+    "eta": "2021-11-29T06:30:00",
+    "destination": "TRONDHEIM",
+    "isSurvey": false,
+    "heading": 42,
+    "draught": 8.4,
+    "a": 70,
+    "b": 168,
+    "c": 18,
+    "d": 14
+  },
+  {
+    "timeStamp": "2021-11-29T13:10:27Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 5,
+    "mmsi": 257378500,
+    "cog": 352.9,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.423342,
+        63.4403
+      ]
+    },
+    "shipType": 33,
+    "name": "SEISMA",
+    "imo": null,
+    "callsign": "JWOG",
+    "country": "Norge",
+    "eta": null,
+    "destination": "INFO MOB 99091750",
+    "isSurvey": false,
+    "heading": null,
+    "draught": 2,
+    "a": 9,
+    "b": 8,
+    "c": 2,
+    "d": 2
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:27Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 257304900,
+    "cog": 8.9,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.396735,
+        63.437997
+      ]
+    },
+    "shipType": 40,
+    "name": "TRONDHEIMSFJORD 1",
+    "imo": 9432177,
+    "callsign": "LAPA",
+    "country": "Norge",
+    "eta": "2021-01-24T16:00:00",
+    "destination": "NO TRD>NO BKS",
+    "isSurvey": false,
+    "heading": 49,
+    "draught": 1.5,
+    "a": 11,
+    "b": 13,
+    "c": 4,
+    "d": 4
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:25Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 257333000,
+    "cog": 47.1,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.397085,
+        63.437873
+      ]
+    },
+    "shipType": 40,
+    "name": "TERNINGEN",
+    "imo": 9693848,
+    "callsign": "LGJQ",
+    "country": "Norge",
+    "eta": "2021-03-15T18:30:00",
+    "destination": "NO TRD>NO KSU",
+    "isSurvey": false,
+    "heading": 45,
+    "draught": 1.3,
+    "a": 14,
+    "b": 27,
+    "c": 7,
+    "d": 4
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:30Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 257114400,
+    "cog": 62.8,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.39628,
+        63.438265
+      ]
+    },
+    "shipType": 40,
+    "name": "TRONDHEIMSFJORD II",
+    "imo": 9432189,
+    "callsign": "LAPB",
+    "country": "Norge",
+    "eta": "2021-03-21T12:34:00",
+    "destination": "TRD>VANVIKAN",
+    "isSurvey": false,
+    "heading": 50,
+    "draught": 2,
+    "a": 9,
+    "b": 15,
+    "c": 4,
+    "d": 4
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:42Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 257030830,
+    "cog": 108,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.399337,
+        63.438712
+      ]
+    },
+    "shipType": 99,
+    "name": "OCEAN SPACE DRONE1",
+    "imo": null,
+    "callsign": "LF5942",
+    "country": "Norge",
+    "eta": null,
+    "destination": "TRONDHEIM",
+    "isSurvey": false,
+    "heading": 320,
+    "draught": 1,
+    "a": 9,
+    "b": 3,
+    "c": 1,
+    "d": 2
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:58Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 15,
+    "mmsi": 257111234,
+    "cog": 0,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.403408,
+        63.442087
+      ]
+    },
+    "shipType": 99,
+    "name": "VDES_234",
+    "imo": null,
+    "callsign": null,
+    "country": "Norge",
+    "eta": null,
+    "destination": null,
+    "isSurvey": false,
+    "heading": null,
+    "draught": null,
+    "a": null,
+    "b": null,
+    "c": null,
+    "d": null
+  },
+  {
+    "timeStamp": "2021-11-29T13:12:04Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 0,
+    "mmsi": 257347700,
+    "cog": 319,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.417703,
+        63.440518
+      ]
+    },
+    "shipType": 50,
+    "name": "LISE",
+    "imo": null,
+    "callsign": "LNPT",
+    "country": "Norge",
+    "eta": null,
+    "destination": "TRONDHEIM PILOT ST",
+    "isSurvey": false,
+    "heading": null,
+    "draught": 1.5,
+    "a": 11,
+    "b": 4,
+    "c": 2,
+    "d": 2
+  },
+  {
+    "timeStamp": "2021-11-29T13:12:04Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 259496000,
+    "cog": 269.2,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.410242,
+        63.43999
+      ]
+    },
+    "shipType": 70,
+    "name": "CANMAR",
+    "imo": 9075369,
+    "callsign": "LNDT",
+    "country": "Norge",
+    "eta": "2021-11-26T21:00:00",
+    "destination": "TRONDHEIM",
+    "isSurvey": false,
+    "heading": 200,
+    "draught": 2.5,
+    "a": 50,
+    "b": 9,
+    "c": 9,
+    "d": 3
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:35Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 5,
+    "mmsi": 257015700,
+    "cog": 316.5,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.141105,
+        63.509602
+      ]
+    },
+    "shipType": 60,
+    "name": "TRONDHEIM",
+    "imo": 9018634,
+    "callsign": "LGEF",
+    "country": "Norge",
+    "eta": "2020-10-01T21:00:00",
+    "destination": "FLAKK>RORVIK",
+    "isSurvey": false,
+    "heading": 269,
+    "draught": 4.3,
+    "a": 50,
+    "b": 47,
+    "c": 8,
+    "d": 8
+  },
+  {
+    "timeStamp": "2021-11-29T13:10:29Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 5,
+    "mmsi": 212900000,
+    "cog": 132.2,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.366288,
+        63.433108
+      ]
+    },
+    "shipType": 70,
+    "name": "RIX AMBER",
+    "imo": 9171101,
+    "callsign": "5BKQ4",
+    "country": "Kypros",
+    "eta": "2021-11-26T22:00:00",
+    "destination": "NO TRD",
+    "isSurvey": false,
+    "heading": 121,
+    "draught": 5.5,
+    "a": 77,
+    "b": 11,
+    "c": 8,
+    "d": 5
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:08Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 5,
+    "mmsi": 259171000,
+    "cog": null,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.392218,
+        63.434043
+      ]
+    },
+    "shipType": 36,
+    "name": "ANNE MARGRETHE",
+    "imo": null,
+    "callsign": "LHZU",
+    "country": "Norge",
+    "eta": "2021-05-28T00:00:00",
+    "destination": "CH16 FOR INFO",
+    "isSurvey": false,
+    "heading": null,
+    "draught": 3,
+    "a": 17,
+    "b": 6,
+    "c": 4,
+    "d": 2
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:45Z",
+    "sog": 0,
+    "rot": 0,
+    "navstat": 0,
+    "mmsi": 257003550,
+    "cog": 345.6,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.375435,
+        63.431923
+      ]
+    },
+    "shipType": 51,
+    "name": "RESCUE JENS BYE",
+    "imo": null,
+    "callsign": "LF5245",
+    "country": "Norge",
+    "eta": "2021-03-21T12:34:00",
+    "destination": "CH16/TLF 91679664",
+    "isSurvey": false,
+    "heading": 6,
+    "draught": 0.8,
+    "a": 8,
+    "b": 4,
+    "c": 2,
+    "d": 2
+  },
+  {
+    "timeStamp": "2021-11-29T13:11:44Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 15,
+    "mmsi": 258135320,
+    "cog": 217.5,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.407972,
+        63.434377
+      ]
+    },
+    "shipType": 37,
+    "name": "LOS DOS",
+    "imo": null,
+    "callsign": "LL7506",
+    "country": "Norge",
+    "eta": null,
+    "destination": "BOGOYAAA",
+    "isSurvey": false,
+    "heading": null,
+    "draught": null,
+    "a": 6,
+    "b": 4,
+    "c": 2,
+    "d": 2
+  },
+  {
+    "timeStamp": "2021-11-29T13:12:08Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 0,
+    "mmsi": 257075210,
+    "cog": null,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.375325,
+        63.43182
+      ]
+    },
+    "shipType": 51,
+    "name": "RS NORSK TIPPING I",
+    "imo": null,
+    "callsign": "LF6484",
+    "country": "Norge",
+    "eta": null,
+    "destination": "BANSPORT",
+    "isSurvey": false,
+    "heading": null,
+    "draught": null,
+    "a": 7,
+    "b": 1,
+    "c": 1,
+    "d": 1
+  },
+  {
+    "timeStamp": "2021-11-29T13:12:08Z",
+    "sog": 0,
+    "rot": null,
+    "navstat": 0,
+    "mmsi": 257415920,
+    "cog": null,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        10.504633,
+        63.437748
+      ]
+    },
+    "shipType": 37,
+    "name": "MONHILD",
+    "imo": null,
+    "callsign": "LM8340",
+    "country": "Norge",
+    "eta": "2021-01-01T01:01:00",
+    "destination": "MONS0YA",
+    "isSurvey": false,
+    "heading": null,
+    "draught": 1.4,
+    "a": 3,
+    "b": 6,
+    "c": 2,
+    "d": 1
+  }
+]
