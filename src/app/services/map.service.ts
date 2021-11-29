@@ -19,18 +19,39 @@ export class MapService {
     })
   }
 
-  public addMarkers({geometry: {coordinates}}) {
+  addMarkers({geometry: {coordinates}}) {
     const marker = L.marker([coordinates[1], coordinates[0]], this.icon);
-    console.log(marker.getLatLng());
+    // console.log(marker.getLatLng());
     marker.addTo(this.map);
   }
 
-  public renderMap(id: string): Map {
+  renderMap(id: string): Map {
     this.map = L.map(id, Settings.initMapOptions);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', Settings.tileLayerOptions).addTo(this.map);
     return this.map;
   }
 
+  handleClick() {
+    console.log('e')
+    this.map.on('click', e => {
+      console.log('e');
+      // @ts-ignore
+      this.addCircle(e.latlng.lat, e.latlng.lng);
+    });
+  }
+
+  addCircle(lng, lat) {
+    L.circle([lng, lat], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 300.0
+    }).addTo(this.map);
+  }
+
+  unhookClick() {
+    this.map.off('click');
+  }
 }
 
 

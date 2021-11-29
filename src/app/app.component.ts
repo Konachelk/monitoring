@@ -21,6 +21,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.apiService.openPositions().subscribe(data => data.forEach(position => this.mapService.addMarkers(position)));
   }
 
+  drawCircle() {
+    this.mapService.handleClick();
+  }
+
+  stopDrawCircle() {
+    this.mapService.unhookClick();
+  }
+
   ngAfterViewInit() {
   }
 }

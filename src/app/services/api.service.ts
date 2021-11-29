@@ -11,7 +11,7 @@ export class ApiService {
 
 
   public openPositions(): Observable<any[]> {
-    return <Observable<any[]>> this.http.get(`${this.apiPath}/openpositions?Xmin=10.09094&Xmax=10.67047&Ymin=-64.60&Ymax=64.9`);
+    return <Observable<any[]>> this.http.get(`${this.apiPath}/openpositions?Xmin=10.40094&Xmax=10.67047&Ymin=63&Ymax=64.9`);
   }
 
 
