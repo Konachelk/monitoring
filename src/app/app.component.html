@@ -1,3 +1,9 @@
 <div id="map-container"></div>
-<button (click)="drawCircle()">Draw</button>
-<button (click)="stopDrawCircle()">Stop</button>
+<div *ngIf="maxDate && minDate" class="control-panel">
+  <button (click)="drawCircle()">Draw</button>
+  <button (click)="stopDrawCircle()">Stop</button>
+  <input #range (input)="showRouteHistory($event.target)" [min]="minDate"
+         [max]="maxDate" [step]="step" [value]=val type="range" />
+  <p>{{historyDate}}</p>
+</div>
+

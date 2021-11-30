@@ -7,8 +7,8 @@ const bounds: L.LatLngBounds = L.latLngBounds(L.latLng(-90.0, -180.0), L.latLng(
 export const initMapOptions: MapOptions = {
   center: [65.45, 9.53],
   minZoom: 3,
-  maxZoom: 13,
-  zoom: 8,
+  maxZoom: 15,
+  zoom: 5,
   maxBounds: bounds,
   maxBoundsViscosity: 1.0,
   bounceAtZoomLimits: true,
