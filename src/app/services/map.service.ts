@@ -6,13 +6,14 @@ import { DataMarker } from '../models/data-marker';
 import { ApiService } from './api.service';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { type } from 'os';
 
 @Injectable()
 export class MapService {
 
   constructor(private apiService: ApiService) {
   }
+
+  historyRouteMarker;
 
   // icon = {
   //   icon: L.icon({
@@ -72,12 +73,16 @@ export class MapService {
   }
 
   addHistoryMarkers(data) {
-    this.trackLayerGroup.clearLayers();
     const timeline = this.timeline;
     const marker = timeline.filter(point => {
       return point[0] === parseInt(data);
     })[0][1];
-    new L.Marker([marker.lat, marker.lng], this.historyIcon).addTo(this.trackLayerGroup);
+    if (this.historyRouteMarker) {
+      this.historyRouteMarker.setLatLng(marker);
+    } else {
+      this.historyRouteMarker = new L.Marker([marker.lat, marker.lng], this.historyIcon);
+      this.historyRouteMarker.addTo(this.trackLayerGroup);
+    }
   }
 
   renderMap(id: string): Map {
@@ -110,7 +115,6 @@ export class MapService {
 
   handleClick() {
     this.map.on('click', e => {
-      console.log('e');
       // @ts-ignore
       this.addCircle(e.latlng.lat, e.latlng.lng);
     });
@@ -152,14 +156,24 @@ export class MapService {
     return new Date(Math.round(Date.parse(date) / coeff) * coeff);
   }
 
-  private roundTimestamp(date, minutes = 10) {
+  private roundTimestamp(date, minutes = 5) {
     const coeff = 1000 * 60 * minutes;
     return Math.round(Date.parse(date) / coeff) * coeff;
   }
 
   private resetHistory() {
+    this.historyRouteMarker = null;
     this.trackLayerGroup.clearLayers();
     this.routeLayerGroup.clearLayers();
+  }
+
+  showRectangle({minX, maxX, minY, maxY}) {
+    const corner1 = L.latLng(minY, minX);
+    const corner2 = L.latLng(maxY, maxX);
+    const co = L.latLngBounds(corner1, corner2);
+    const rect =  L.rectangle(co, {color: '#ff7800', weight: 1});
+    rect.addTo(this.map);
+    setTimeout(() => rect.remove(), 3000);
   }
 }
 

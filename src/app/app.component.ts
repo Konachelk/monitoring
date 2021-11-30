@@ -13,19 +13,38 @@ const positons = require('./services/open-positions.json');
 })
 export class AppComponent implements OnInit, AfterViewInit {
   private map: Map;
+  private subscription;
   minDate;
   maxDate;
-  step = 1000 * 60 * 10;
+  step = 1000 * 60 * 5;
   historyDate: Date;
   val;
+  rectangle = {
+    minX: 9.00094,
+    maxX: 10.67047,
+    minY: 63,
+    maxY: 64,
+  };
 
   constructor(public mapService: MapService, private apiService: ApiService, private authService: AuthService) {
   }
 
   ngOnInit() {
     this.map = this.mapService.renderMap('map-container');
-    this.apiService.openPositions().subscribe(data => this.mapService.addMarkers(data));
+    this.getPositions();
     this.mapService.timeline$.subscribe(timeline => this.setTimeline(timeline));
+  }
+
+  getPositions() {
+    this.mapService.showRectangle(this.rectangle);
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.subscription = this.apiService.openPositions(this.rectangle).subscribe(
+      data => {
+        this.mapService.addMarkers(data.slice(0, 200));
+      }
+    );
   }
 
   setTimeline(timeline) {
