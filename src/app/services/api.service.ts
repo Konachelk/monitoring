@@ -10,7 +10,6 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   openPositions({minX, maxX, minY, maxY}): Observable<any[]> {
-    console.log(minX, maxX, minY, maxY)
     return <Observable<any[]>>
       interval(30 * 1000).pipe(
         startWith(0),

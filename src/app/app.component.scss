@@ -3,14 +3,36 @@
   height:100vh;
   width:60vw;
   right: 0;
+  display: flex;
+  justify-content: center;
 }
 
-//.panel-admin {
-//  width: 40vw;
-//  height: 100vh;
-//  display: flex;
-//  flex-direction: column;
-//}
+.panel-admin {
+  padding: 1rem;
+  width: 40vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  position: absolute;
+  bottom: 1rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 70%;
+  padding: 15px;
+  border-radius: 6px;
+  z-index: 1000;
+  background-color: #eee;
+}
+
+.timeline {
+  text-align: center;
+  #date-range {
+    width: 90%;
+  }
+}
 
 button {
   max-width: 100px;
@@ -18,8 +40,21 @@ button {
 
 
 .control-panel {
-  #date-range {
-    width: 80%;
-  }
+
 }
+
+//@media screen and (-webkit-min-device-pixel-ratio: 0) {
+//
+//  input[type="range"]::-webkit-slider-thumb {
+//    width: 15px;
+//    -webkit-appearance: none;
+//    appearance: none;
+//    height: 15px;
+//    cursor: ew-resize;
+//    background: #FFF;
+//    box-shadow: -405px 0 0 400px #605E5C;
+//    border-radius: 50%;
+//
+//  }
+//}
 

@@ -2,7 +2,6 @@ import * as L from 'leaflet';
 import { MapOptions } from 'leaflet';
 import { TileLayerOptions } from 'leaflet';
 
-// const bounds: L.LatLngBounds = L.latLngBounds(L.latLng(-90.0, -180.0), L.latLng(90.0, 180.0));
 const bounds: L.LatLngBounds = L.latLngBounds(L.latLng(45, -10), L.latLng(80.0, 50.0));
 
 export const initMapOptions: MapOptions = {
@@ -10,6 +9,7 @@ export const initMapOptions: MapOptions = {
   minZoom: 5,
   maxZoom: 15,
   zoom: 5,
+  zoomControl: false,
   maxBounds: bounds,
   maxBoundsViscosity: 1.0,
   bounceAtZoomLimits: true,

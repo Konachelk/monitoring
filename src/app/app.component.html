@@ -1,19 +1,22 @@
-<div id="map-container"></div>
-<div class="panel-admin">
-  <div class="control-panel">
+<div #map id="map-container">
+  <div *ngIf="minDate && maxDate && showTimeline" class="card timeline" (mousedown)="disableDrag()" (mouseup)="enableDrag()">
     <input id="date-range" (input)="showRouteHistory($event.target)" [min]="minDate"
-           [max]="maxDate" [step]="step" [value]=val type="range" />
-    <p>{{historyDate}}</p>
+           [max]="maxDate" [value]="minDate" [step]="step" type="range" />
+    <p>Time: {{historyDate}}</p>
   </div>
+</div>
+<div class="panel-admin">
+
   <div class="control-panel">
-    <input type="text" [(ngModel)]="rectangle.minX" />
-    <input type="text" [(ngModel)]="rectangle.maxX" />
-    <input type="text" [(ngModel)]="rectangle.minY" />
-    <input type="text" [(ngModel)]="rectangle.maxY" />
-    <button (click)="getPositions()">Get</button>
+    <input type="text" #minX [value]="9.00094" />
+    <input type="text" #maxX [value]="10.67047" />
+    <input type="text" #minY [value]="63" />
+    <input type="text" #maxY [value]="65" />
+    <button (click)="this.mapService.getPositions({minX: minX.value, minY: minY.value, maxX: maxX.value, maxY: maxY.value})">Get</button>
   </div>
   <button (click)="drawCircle()">Draw</button>
   <button (click)="stopDrawCircle()">Stop</button>
+  <button (click)="toggleShowTimeline()">Toggle</button>
 </div>
 
 

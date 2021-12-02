@@ -9,21 +9,12 @@ import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class MapService {
+  private subscription: any;
 
   constructor(private apiService: ApiService) {
   }
 
   historyRouteMarker;
-
-  // icon = {
-  //   icon: L.icon({
-  //     // iconSize: [ 25, 41 ],
-  //     iconAnchor: [12, 30],
-  //     iconUrl: 'leaflet/marker-icon.png',
-  //     shadowUrl: 'leaflet/marker-shadow.png'
-  //   })
-  // };
-
   icon = {
     icon: L.icon({
       iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
@@ -31,7 +22,7 @@ export class MapService {
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
-      shadowSize: [41, 41]
+      shadowSize: [41, 41],
     })
   };
 
@@ -60,26 +51,36 @@ export class MapService {
     return this._timeline.getValue();
   }
 
-
+  getPositions(rectangle = {minX: 9.00094, maxX: 10.67047, minY: 63, maxY: 64}) {
+    this.showRectangle(rectangle);
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+    this.subscription = this.apiService.openPositions(rectangle).subscribe(
+      data => {
+        this.addMarkers(data.slice(0, 200));
+      }
+    );
+  }
 
   addMarkers(data) {
     this.layerGroup.clearLayers();
     data.forEach(({geometry: {coordinates}, mmsi}) => {
-      const marker = new DataMarker([coordinates[1], coordinates[0]], {mmsi}, this.icon);
+      const marker = new DataMarker([coordinates[1], coordinates[0]], {mmsi }, this.icon);
       marker.bindTooltip(`Name: ${marker.data.mmsi}, Lat: ${coordinates[1]}, lng: ${coordinates[0]}`);
       marker.on('click', this.markerOnClick, this);
       marker.addTo(this.layerGroup);
     });
   }
 
-  addHistoryMarkers(data) {
+  addHistoryMarker(data) {
     const timeline = this.timeline;
     const marker = timeline.filter(point => {
       return point[0] === parseInt(data);
-    })[0][1];
-    if (this.historyRouteMarker) {
+    })?.[0]?.[1];
+    if (this.historyRouteMarker && marker) {
       this.historyRouteMarker.setLatLng(marker);
-    } else {
+    } else if (marker) {
       this.historyRouteMarker = new L.Marker([marker.lat, marker.lng], this.historyIcon);
       this.historyRouteMarker.addTo(this.trackLayerGroup);
     }
@@ -161,19 +162,18 @@ export class MapService {
     return Math.round(Date.parse(date) / coeff) * coeff;
   }
 
-  private resetHistory() {
+  public resetHistory() {
+
     this.historyRouteMarker = null;
     this.trackLayerGroup.clearLayers();
     this.routeLayerGroup.clearLayers();
   }
 
   showRectangle({minX, maxX, minY, maxY}) {
-    const corner1 = L.latLng(minY, minX);
-    const corner2 = L.latLng(maxY, maxX);
-    const co = L.latLngBounds(corner1, corner2);
-    const rect =  L.rectangle(co, {color: '#ff7800', weight: 1});
-    rect.addTo(this.map);
-    setTimeout(() => rect.remove(), 3000);
+    const bounds = L.latLngBounds(L.latLng(minY, minX), L.latLng(maxY, maxX));
+    const rectangle =  L.rectangle(bounds, {color: '#ff7800', weight: 1});
+    rectangle.addTo(this.map);
+    setTimeout(() => rectangle.remove(), 3000);
   }
 }
 
