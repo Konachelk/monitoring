@@ -10,6 +10,7 @@ import { filter } from 'rxjs/operators';
 @Injectable()
 export class MapService {
   private subscription: any;
+  private visibleShipsData: void;
 
   constructor(private apiService: ApiService) {
   }
@@ -51,6 +52,17 @@ export class MapService {
     return this._timeline.getValue();
   }
 
+  private readonly _shipSelected = new BehaviorSubject<any>(null);
+  readonly shipSelected$ = this._shipSelected.asObservable().pipe(filter(vale => vale !== null));
+
+  private set shipSelected(val) {
+    this._shipSelected.next(val);
+  }
+
+  private get shipSelected() {
+    return this._shipSelected.getValue();
+  }
+
   getPositions(rectangle = {minX: 9.00094, maxX: 10.67047, minY: 63, maxY: 64}) {
     this.showRectangle(rectangle);
     if (this.subscription) {
@@ -58,15 +70,21 @@ export class MapService {
     }
     this.subscription = this.apiService.openPositions(rectangle).subscribe(
       data => {
-        this.addMarkers(data.slice(0, 200));
+        const dataSlice = data.slice(0, 200);
+        this.visibleShipsData = this.createShipsData(dataSlice);
+        this.addMarkers(dataSlice);
       }
     );
+  }
+
+  createShipsData(openPositions) {
+    return openPositions.reduce((acc, cur) => ({ ...acc, [cur.mmsi]: cur }), {});
   }
 
   addMarkers(data) {
     this.layerGroup.clearLayers();
     data.forEach(({geometry: {coordinates}, mmsi}) => {
-      const marker = new DataMarker([coordinates[1], coordinates[0]], {mmsi }, this.icon);
+      const marker = new DataMarker([coordinates[1], coordinates[0]], {mmsi, latLng: {lat: coordinates[1], lng: [coordinates[0]]} }, this.icon);
       marker.bindTooltip(`Name: ${marker.data.mmsi}, Lat: ${coordinates[1]}, lng: ${coordinates[0]}`);
       marker.on('click', this.markerOnClick, this);
       marker.addTo(this.layerGroup);
@@ -75,9 +93,12 @@ export class MapService {
 
   addHistoryMarker(data) {
     const timeline = this.timeline;
-    const marker = timeline.filter(point => {
+    const marker = data ? timeline.filter(point => {
       return point[0] === parseInt(data);
-    })?.[0]?.[1];
+    })?.[0]?.[1] : timeline?.[0]?.[1];
+    // const marker = timeline.filter(point => {
+    //   return point[0] === parseInt(data);
+    // })?.[0]?.[1];
     if (this.historyRouteMarker && marker) {
       this.historyRouteMarker.setLatLng(marker);
     } else if (marker) {
@@ -100,6 +121,7 @@ export class MapService {
       trackObj => {
         this.addShipTrackToRouteLayer(trackObj.tracks[0]);
         this.createTimeline(trackObj.tracks[0]);
+        this.addHistoryMarker(null);
       }
     );
   }
@@ -136,7 +158,8 @@ export class MapService {
 
   markerOnClick(e) {
     this.resetHistory();
-    this.handleShipIntervalPoints(e.target.data.mmsi);
+    this.map.panTo(new L.LatLng(e.target.data.latLng.lat, e.target.data.latLng.lng));
+    this.shipSelected = this.visibleShipsData[e.target.data.mmsi];
   }
 
   private createTimeline(track: any) {

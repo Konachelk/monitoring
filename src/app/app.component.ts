@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   step = 1000 * 60 * 5;
   historyDate: Date;
   public showTimeline = false;
+  shipSelected;
 
   constructor(public mapService: MapService) {
   }
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
     this.map = this.mapService.renderMap('map-container');
     this.mapService.getPositions();
     this.mapService.timeline$.subscribe(timeline => this.setTimeline(timeline));
+    this.mapService.shipSelected$.subscribe(ship => {this.shipSelected = ship; this.showTimeline = false; });
   }
 
   setTimeline(timeline) {
@@ -45,7 +47,11 @@ export class AppComponent implements OnInit {
     this.historyDate = new Date(parseInt(e.value));
   }
 
-  toggleShowTimeline() {
+  toggleShowTimeline(mmsi) {
+    this.mapService.resetHistory();
+    if (!this.showTimeline) {
+      this.mapService.handleShipIntervalPoints(mmsi);
+    }
     this.showTimeline = !this.showTimeline;
   }
 
