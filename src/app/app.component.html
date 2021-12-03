@@ -1,5 +1,4 @@
 <div #map id="map-container">
-<!--  <div *ngIf="minDate && maxDate && showTimeline" class="card timeline" (mousedown)="disableDrag()" (mouseup)="enableDrag()">-->
   <div *ngIf="shipSelected && showTimeline" class="card timeline" (mousedown)="disableDrag()" (mouseup)="enableDrag()">
     <input id="date-range" (input)="showRouteHistory($event.target)" [min]="minDate"
            [max]="maxDate" [value]="minDate" [step]="step" type="range" />

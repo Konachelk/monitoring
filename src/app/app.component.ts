@@ -43,14 +43,14 @@ export class AppComponent implements OnInit {
   }
 
   showRouteHistory(e) {
-    this.mapService.addHistoryMarker(e.value);
+    this.mapService.addHistoryMarker(parseInt(e.value));
     this.historyDate = new Date(parseInt(e.value));
   }
 
   toggleShowTimeline(mmsi) {
     this.mapService.resetHistory();
     if (!this.showTimeline) {
-      this.mapService.handleShipIntervalPoints(mmsi);
+      this.mapService.openTimeline(mmsi);
     }
     this.showTimeline = !this.showTimeline;
   }

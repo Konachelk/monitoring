@@ -91,20 +91,20 @@ export class MapService {
     });
   }
 
-  addHistoryMarker(data) {
-    const timeline = this.timeline;
-    const marker = data ? timeline.filter(point => {
-      return point[0] === parseInt(data);
-    })?.[0]?.[1] : timeline?.[0]?.[1];
-    // const marker = timeline.filter(point => {
-    //   return point[0] === parseInt(data);
-    // })?.[0]?.[1];
+  addHistoryMarker(timestamp) {
+    const marker = this.shipLatLngByTimestamp(timestamp);
     if (this.historyRouteMarker && marker) {
       this.historyRouteMarker.setLatLng(marker);
     } else if (marker) {
       this.historyRouteMarker = new L.Marker([marker.lat, marker.lng], this.historyIcon);
       this.historyRouteMarker.addTo(this.trackLayerGroup);
     }
+  }
+
+  shipLatLngByTimestamp(timestamp) {
+    return timestamp
+      ? this.timeline.find(point => point[0] === timestamp)?.[1]
+      : this.timeline[0]?.[1];
   }
 
   renderMap(id: string): Map {
@@ -116,7 +116,7 @@ export class MapService {
     return this.map;
   }
 
-  handleShipIntervalPoints(mmsi: string) {
+  openTimeline(mmsi: string) {
     this.apiService.track(mmsi).subscribe(
       trackObj => {
         this.addShipTrackToRouteLayer(trackObj.tracks[0]);
