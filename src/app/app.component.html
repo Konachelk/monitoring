@@ -6,17 +6,42 @@
   </div>
 </div>
 <div class="panel-admin">
+  <mat-card  class="example-card">
+    <div class="ship-image"></div>
+    <mat-card-content class="container">
+      <p *ngFor="let part of [[0,3], [3,5], [5,7]]">
+        <app-ship-detail-card class='detail' *ngFor="let nazwa of nazwa.slice(part[0],part[1])" [shipSelected]="shipSelected" [detail]="nazwa">
+        </app-ship-detail-card>
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <ng-template #noShipSelected>
+    <mat-card class="example-card">
+      No ship selected
+    </mat-card>
+  </ng-template>
 
-  <div class="control-panel">
-    <input type="text" #minX [value]="9.00094" />
-    <input type="text" #maxX [value]="10.67047" />
-    <input type="text" #minY [value]="63" />
-    <input type="text" #maxY [value]="65" />
-    <button (click)="this.mapService.getPositions({minX: minX.value, minY: minY.value, maxX: maxX.value, maxY: maxY.value})">Get</button>
-  </div>
-  <button (click)="drawCircle()">Draw</button>
-  <button (click)="stopDrawCircle()">Stop</button>
-  <button *ngIf="shipSelected" (click)="toggleShowTimeline(shipSelected.mmsi)">Toggle</button>
+  <mat-card class="second">
+    <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
+      <mat-tab class="controls" label="Timeline">
+          <div class="tab-content">
+            <button [disabled]="!shipSelected" mat-raised-button (click)="toggleShowTimeline(shipSelected.mmsi)">{{showTimeline ? "Hide" : "Show" }} Timeline</button>
+          </div>
+      </mat-tab>
+      <mat-tab label="Second">Content 2</mat-tab>
+      <mat-tab label="Third">Content 3</mat-tab>
+    </mat-tab-group>
+  </mat-card>
+<!--  <div class="control-panel">-->
+<!--    <input type="text" #minX [value]="9.00094" />-->
+<!--    <input type="text" #maxX [value]="10.67047" />-->
+<!--    <input type="text" #minY [value]="63" />-->
+<!--    <input type="text" #maxY [value]="65" />-->
+<!--    <button (click)="this.mapService.getPositions({minX: minX.value, minY: minY.value, maxX: maxX.value, maxY: maxY.value})">Get</button>-->
+<!--  </div>-->
+<!--  <button (click)="drawCircle()">Draw</button>-->
+<!--  <button (click)="stopDrawCircle()">Stop</button>-->
+<!--  <button *ngIf="shipSelected" (click)="toggleShowTimeline(shipSelected.mmsi)">{{showTimeline ? "Hide" : "Show" }} Timeline</button>-->
 </div>
 
 

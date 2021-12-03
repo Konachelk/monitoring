@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
   public showTimeline = false;
   shipSelected;
 
+   nazwa = [['MMSI', 'mmsi'], ['Ship Name', 'name'], ['Call sign', 'callsign'], ['Country', 'country'], ['Destination', 'destination'], ['Ship type', 'shipType'], ['ETA', 'eta']];
+
   constructor(public mapService: MapService) {
   }
 

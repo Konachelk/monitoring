@@ -10,7 +10,7 @@
 */
 * {
   margin: 0;
-  font-family: Helvetica, Roboto,  sans-serif;
+  /*font-family: Helvetica, Roboto,  sans-serif;*/
 }
 /*
   3. Allow percentage-based heights in the application
@@ -27,3 +27,6 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

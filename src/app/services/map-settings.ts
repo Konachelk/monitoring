@@ -8,7 +8,7 @@ export const initMapOptions: MapOptions = {
   center: [65.45, 9.53],
   minZoom: 5,
   maxZoom: 15,
-  zoom: 5,
+  zoom: 7,
   zoomControl: false,
   maxBounds: bounds,
   maxBoundsViscosity: 1.0,
