@@ -60,6 +60,8 @@ export class AppComponent implements OnInit {
   }
 
   toggleShowTimeline(mmsi) {
+    this.sog = null;
+    this.time = null;
     this.mapService.resetHistory();
     if (!this.showTimeline) {
       this.mapService.openTimeline(mmsi);

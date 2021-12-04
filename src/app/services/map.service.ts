@@ -53,7 +53,8 @@ export class MapService {
   }
 
   private readonly _shipSelected = new BehaviorSubject<any>(null);
-  readonly shipSelected$ = this._shipSelected.asObservable().pipe(filter(vale => vale !== null));
+  readonly shipSelected$ = this._shipSelected.asObservable();
+  // readonly shipSelected$ = this._shipSelected.asObservable().pipe(filter(vale => vale !== null));
 
   private set shipSelected(val) {
     this._shipSelected.next(val);
@@ -64,6 +65,11 @@ export class MapService {
   }
 
   getPositions(rectangle = {minX: 9.00094, maxX: 10.67047, minY: 63, maxY: 64}) {
+    // console.log(rectangle);
+    // this.map.panTo(new L.LatLng((rectangle.maxY + rectangle.minY) / 2, (rectangle.maxX + rectangle.minX) / 2));
+    // this.map.panTo(new L.LatLng((rectangle.maxX + rectangle.minX) / 2, (rectangle.maxY + rectangle.minY) / 2));
+    this.shipSelected = null;
+    this.resetHistory();
     this.showRectangle(rectangle);
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -186,7 +192,6 @@ export class MapService {
   }
 
   public resetHistory() {
-
     this.historyRouteMarker = null;
     this.trackLayerGroup.clearLayers();
     this.routeLayerGroup.clearLayers();

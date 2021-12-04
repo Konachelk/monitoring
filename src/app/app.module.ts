@@ -14,6 +14,8 @@ import { ShipDetailCardComponent } from './ship-detail-card/ship-detail-card.com
 import { MatTabsModule } from '@angular/material/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { TimelineChartComponent } from './timeline-chart/timeline-chart.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -31,7 +33,9 @@ import { TimelineChartComponent } from './timeline-chart/timeline-chart.componen
     MatCardModule,
     MatButtonModule,
     MatTabsModule,
-    ChartsModule
+    ChartsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     MapService,
