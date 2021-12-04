@@ -16,6 +16,7 @@ import { ChartsModule } from 'ng2-charts';
 import { TimelineChartComponent } from './timeline-chart/timeline-chart.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 
 
@@ -35,7 +36,8 @@ import { MatInputModule } from '@angular/material/input';
     MatTabsModule,
     ChartsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatListModule
   ],
   providers: [
     MapService,

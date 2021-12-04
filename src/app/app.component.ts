@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   sog;
   time;
 
-   nazwa = [['MMSI', 'mmsi'], ['Ship Name', 'name'], ['Call sign', 'callsign'], ['Country', 'country'], ['Destination', 'destination'], ['Ship type', 'shipType'], ['ETA', 'eta']];
+   nazwa = [['MMSI', 'mmsi'], ['Ship name', 'name'], ['Call sign', 'callsign'], ['Country', 'country'], ['Destination', 'destination'], ['Ship type', 'shipType'], ['ETA', 'eta']];
 
   constructor(public mapService: MapService) {
   }

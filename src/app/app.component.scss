@@ -71,21 +71,26 @@
 
 .timeline {
   height: calc(100% - 40px);
-  //margin: 10px;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  .no-timeline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1
+  }
   .chart {
     flex: 1;
   }
 }
 
-.no-timeline {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1
+.ship-list {
+  overflow-y: auto;
+  max-height: 300px;
 }
+
+
 
 
 .example-card {

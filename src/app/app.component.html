@@ -37,6 +37,7 @@
               </mat-form-field></td>
             </tr>
           </table>
+<!--          <p>Show groups:</p>-->
           <button mat-raised-button (click)="this.mapService.getPositions({minX: minX.value, minY: minY.value, maxX: maxX.value, maxY: maxY.value})">Get Area</button>
       </mat-tab>
 
@@ -49,7 +50,25 @@
           </div>
       </mat-tab>
 
-      <mat-tab label="Third">Content 3</mat-tab>
+      <mat-tab class="controls tab-content" label="Ship List">
+        <div class="ship-list">
+          <mat-list role="list">
+            <mat-list-item role="listitem">Item 1</mat-list-item>
+            <mat-list-item role="listitem">Item 2</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </mat-card>
 

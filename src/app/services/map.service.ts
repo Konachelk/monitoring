@@ -65,9 +65,6 @@ export class MapService {
   }
 
   getPositions(rectangle = {minX: 9.00094, maxX: 10.67047, minY: 63, maxY: 64}) {
-    // console.log(rectangle);
-    // this.map.panTo(new L.LatLng((rectangle.maxY + rectangle.minY) / 2, (rectangle.maxX + rectangle.minX) / 2));
-    // this.map.panTo(new L.LatLng((rectangle.maxX + rectangle.minX) / 2, (rectangle.maxY + rectangle.minY) / 2));
     this.shipSelected = null;
     this.resetHistory();
     this.showRectangle(rectangle);
@@ -78,6 +75,7 @@ export class MapService {
       data => {
         const dataSlice = data.slice(0, 200);
         this.visibleShipsData = this.createShipsData(dataSlice);
+        console.log(this.visibleShipsData);
         this.addMarkers(dataSlice);
       }
     );
@@ -91,7 +89,7 @@ export class MapService {
     this.layerGroup.clearLayers();
     data.forEach(({geometry: {coordinates}, mmsi}) => {
       const marker = new DataMarker([coordinates[1], coordinates[0]], {mmsi, latLng: {lat: coordinates[1], lng: [coordinates[0]]} }, this.icon);
-      marker.bindTooltip(`Name: ${marker.data.mmsi}, Lat: ${coordinates[1]}, lng: ${coordinates[0]}`);
+      marker.bindTooltip(`Mmsi: ${marker.data.mmsi}, Lat: ${coordinates[1]}, lng: ${coordinates[0]}`);
       marker.on('click', this.markerOnClick, this);
       marker.addTo(this.layerGroup);
     });

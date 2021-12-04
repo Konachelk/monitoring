@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { interval, Observable } from 'rxjs';
-import { flatMap, startWith, switchMap } from 'rxjs/operators';
+import { startWith, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
