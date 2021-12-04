@@ -12,11 +12,16 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { ShipDetailCardComponent } from './ship-detail-card/ship-detail-card.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ChartsModule } from 'ng2-charts';
+import { TimelineChartComponent } from './timeline-chart/timeline-chart.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShipDetailCardComponent
+    ShipDetailCardComponent,
+    TimelineChartComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    ChartsModule
   ],
   providers: [
     MapService,

@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   historyDate: Date;
   public showTimeline = false;
   shipSelected;
+  sog;
+  time;
 
    nazwa = [['MMSI', 'mmsi'], ['Ship Name', 'name'], ['Call sign', 'callsign'], ['Country', 'country'], ['Destination', 'destination'], ['Ship type', 'shipType'], ['ETA', 'eta']];
 
@@ -31,6 +33,14 @@ export class AppComponent implements OnInit {
   }
 
   setTimeline(timeline) {
+    const sog = [];
+    const time = [];
+    timeline.forEach(t => {
+      sog.push(new Date(t[0]));
+      time.push(t[2]);
+    });
+    this.sog = [{data: time}];
+    this.time = sog;
     this.maxDate  = timeline[timeline.length - 1][0];
     this.minDate = timeline[0][0];
     this.historyDate = new Date(timeline[0][0]);

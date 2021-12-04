@@ -26,6 +26,8 @@
       <mat-tab class="controls" label="Timeline">
           <div class="tab-content">
             <button [disabled]="!shipSelected" mat-raised-button (click)="toggleShowTimeline(shipSelected.mmsi)">{{showTimeline ? "Hide" : "Show" }} Timeline</button>
+            <app-timeline-chart *ngIf="(sog && time && showTimeline) else noTimeline" [lineChartData]="sog" [lineChartLabels]="time"></app-timeline-chart>
+            <ng-template #noTimeline>Show timeline to see SOG chart</ng-template>
           </div>
       </mat-tab>
       <mat-tab label="Second">Content 2</mat-tab>

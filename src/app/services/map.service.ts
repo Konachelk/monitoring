@@ -163,7 +163,7 @@ export class MapService {
   }
 
   private createTimeline(track: any) {
-    const trackDates = track.intervalPoints.map((v) => [this.roundTimestamp(v.msgt), new L.LatLng(v.lat, v.lon)]);
+    const trackDates = track.intervalPoints.map((v) => [this.roundTimestamp(v.msgt), new L.LatLng(v.lat, v.lon), v.sog]);
     const dates = new Set();
     const filtered = trackDates.filter(trac => {
       if (dates.has(trac[0])) {
