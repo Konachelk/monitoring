@@ -1,5 +1,5 @@
 <div #map id="map-container">
-  <div *ngIf="shipSelected && showTimeline" class="card timeline-range" (mousedown)="disableDrag()" (mouseup)="enableDrag()">
+  <div *ngIf="shipSelected && showTimeline" class="card timeline-range" (mousedown)="mapService.disableDrag()" (mouseup)="mapService.enableDrag()">
     <input id="date-range" (input)="showRouteHistory($event.target)" [min]="minDate"
            [max]="maxDate" [value]="minDate" [step]="step" type="range" />
     <p>Time: {{historyDate}}</p>
@@ -7,10 +7,12 @@
 </div>
 <div class="panel-admin">
   <mat-card  class="example-card">
-    <div class="ship-image"></div>
+    <div #shipImage [ngStyle]="{'background-image': 'url(' + url + ')'}"  class="ship-image"></div>
     <mat-card-content class="container">
       <p *ngFor="let part of [[0,3], [3,5], [5,7]]">
-        <app-ship-detail-card class='detail' *ngFor="let nazwa of nazwa.slice(part[0],part[1])" [shipSelected]="shipSelected" [detail]="nazwa">
+        <app-ship-detail-card class='detail'
+                              *ngFor="let shipProperty of shipProperties.slice(part[0],part[1])"
+                              [shipSelected]="shipSelected" [detail]="shipProperty">
         </app-ship-detail-card>
       </p>
     </mat-card-content>
@@ -22,7 +24,7 @@
           <table>
             <tr>
             <td><mat-form-field>
-              <mat-label>minX</mat-label><input matInput type="text" #minX [value]="9.00094" />
+              <mat-label>minX</mat-label><input matInput type="text" #minX [value]="6.00094" />
             </mat-form-field></td>
             <td><mat-form-field>
               <mat-label>maxX</mat-label><input matInput type="text" #maxX [value]="10.67047" />
@@ -33,11 +35,10 @@
                 <mat-label>minY</mat-label><input matInput type="text" #minY [value]="63.1564" />
               </mat-form-field></td>
               <td><mat-form-field>
-                <mat-label>maxY</mat-label><input matInput type="text" #maxY [value]="66.4723" />
+                <mat-label>maxY</mat-label><input matInput type="text" #maxY [value]="64.256" />
               </mat-form-field></td>
             </tr>
           </table>
-<!--          <p>Show groups:</p>-->
           <button mat-raised-button (click)="this.mapService.getPositions({minX: minX.value, minY: minY.value, maxX: maxX.value, maxY: maxY.value})">Get Area</button>
       </mat-tab>
 
@@ -45,35 +46,22 @@
       <mat-tab class="controls tab-content" label="Timeline">
           <div class="timeline">
             <button [disabled]="!shipSelected" mat-raised-button (click)="toggleShowTimeline(shipSelected.mmsi)">{{showTimeline ? "Hide" : "Show" }} Timeline</button>
-            <app-timeline-chart class="chart" *ngIf="(sog && time && showTimeline) else noTimeline" [lineChartData]="sog" [lineChartLabels]="time"></app-timeline-chart>
+            <app-timeline-chart class="chart" *ngIf="(sog && time && showTimeline) else noTimeline" [lineChartData]="time" [lineChartLabels]="sog"></app-timeline-chart>
             <ng-template  #noTimeline><div class="no-timeline">Show timeline to see SOG chart</div> </ng-template>
           </div>
       </mat-tab>
 
       <mat-tab class="controls tab-content" label="Ship List">
         <div class="ship-list">
-          <mat-list role="list">
-            <mat-list-item role="listitem">Item 1</mat-list-item>
-            <mat-list-item role="listitem">Item 2</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-          </mat-list>
+          <mat-selection-list [multiple]="false">
+            <mat-list-option (click)="mapService.selectShip(ship.key)" *ngFor="let ship of (mapService.visibleShipsData$ | async) | keyvalue">
+              {{ship.key}}
+            </mat-list-option>
+          </mat-selection-list>
         </div>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
-
-<!--  <button (click)="drawCircle()">Draw</button>-->
-<!--  <button (click)="stopDrawCircle()">Stop</button>-->
 </div>
 
 

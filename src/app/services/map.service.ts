@@ -6,43 +6,35 @@ import { DataMarker } from '../models/data-marker';
 import { ApiService } from './api.service';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { createTimeline, shipHistoryTrack } from './timeline';
+import { historyIcon, icon } from './icons';
 
 @Injectable()
 export class MapService {
   private subscription: any;
-  private visibleShipsData: void;
 
   constructor(private apiService: ApiService) {
   }
 
   historyRouteMarker;
-  icon = {
-    icon: L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    })
-  };
-
-  historyIcon = {
-    icon: L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    })
-  };
   private map: Map;
   private layerGroup: LayerGroup;
-  private routeLayerGroup: LayerGroup;
-  private trackLayerGroup: LayerGroup;
+  private historyShipMarkerLayerGroup: LayerGroup;
+  private historyTrackLayerGroup: LayerGroup;
+
+  private readonly _visibleShipsData = new BehaviorSubject<any>(null);
+  readonly visibleShipsData$ = this._visibleShipsData.asObservable().pipe(filter(val => val !== null));
+
+  private set visibleShipsData(val) {
+    this._visibleShipsData.next(val);
+  }
+
+  private get visibleShipsData() {
+    return this._visibleShipsData.getValue();
+  }
+
   private readonly _timeline = new BehaviorSubject<any>(null);
-  readonly timeline$ = this._timeline.asObservable().pipe(filter(vale => vale !== null));
+  readonly timeline$ = this._timeline.asObservable().pipe(filter(val => val !== null));
 
   private set timeline(val) {
     this._timeline.next(val);
@@ -53,8 +45,8 @@ export class MapService {
   }
 
   private readonly _shipSelected = new BehaviorSubject<any>(null);
-  readonly shipSelected$ = this._shipSelected.asObservable();
-  // readonly shipSelected$ = this._shipSelected.asObservable().pipe(filter(vale => vale !== null));
+  // readonly shipSelected$ = this._shipSelected.asObservable();
+  readonly shipSelected$ = this._shipSelected.asObservable().pipe(filter(val => val !== null));
 
   private set shipSelected(val) {
     this._shipSelected.next(val);
@@ -64,35 +56,37 @@ export class MapService {
     return this._shipSelected.getValue();
   }
 
-  getPositions(rectangle = {minX: 9.00094, maxX: 10.67047, minY: 63, maxY: 64}) {
-    this.shipSelected = null;
+  getPositions(rectangle = {minX: 6.00094, maxX: 10.67047, minY: 63.1564, maxY: 64.256}) {
     this.resetHistory();
-    this.showRectangle(rectangle);
+    this.showAreaRectangle(rectangle);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.subscription = this.apiService.openPositions(rectangle).subscribe(
+    this.subscription = this.apiService.openPositionsInterval(rectangle).subscribe(
       data => {
         const dataSlice = data.slice(0, 200);
+        this.shipSelected = null;
         this.visibleShipsData = this.createShipsData(dataSlice);
-        console.log(this.visibleShipsData);
-        this.addMarkers(dataSlice);
+        this.addShipMarkersInSetArea(dataSlice);
       }
     );
   }
-
   createShipsData(openPositions) {
     return openPositions.reduce((acc, cur) => ({ ...acc, [cur.mmsi]: cur }), {});
   }
 
-  addMarkers(data) {
+  addShipMarkersInSetArea(data) {
     this.layerGroup.clearLayers();
     data.forEach(({geometry: {coordinates}, mmsi}) => {
-      const marker = new DataMarker([coordinates[1], coordinates[0]], {mmsi, latLng: {lat: coordinates[1], lng: [coordinates[0]]} }, this.icon);
-      marker.bindTooltip(`Mmsi: ${marker.data.mmsi}, Lat: ${coordinates[1]}, lng: ${coordinates[0]}`);
-      marker.on('click', this.markerOnClick, this);
-      marker.addTo(this.layerGroup);
+      this.addShipMarkerInSetArea(coordinates, mmsi);
     });
+  }
+
+  addShipMarkerInSetArea(coordinates, mmsi) {
+    const marker = new DataMarker([coordinates[1], coordinates[0]], {mmsi, latLng: {lat: coordinates[1], lng: [coordinates[0]]} }, icon);
+    marker.bindTooltip(`Mmsi: ${marker.data.mmsi}, Lat: ${coordinates[1]}, lng: ${coordinates[0]}`);
+    marker.on('click', this.onMarkerClick, this);
+    marker.addTo(this.layerGroup);
   }
 
   addHistoryMarker(timestamp) {
@@ -100,8 +94,8 @@ export class MapService {
     if (this.historyRouteMarker && marker) {
       this.historyRouteMarker.setLatLng(marker);
     } else if (marker) {
-      this.historyRouteMarker = new L.Marker([marker.lat, marker.lng], this.historyIcon);
-      this.historyRouteMarker.addTo(this.trackLayerGroup);
+      this.historyRouteMarker = new L.Marker([marker.lat, marker.lng], historyIcon);
+      this.historyRouteMarker.addTo(this.historyTrackLayerGroup);
     }
   }
 
@@ -115,29 +109,23 @@ export class MapService {
     this.map = L.map(id, Settings.initMapOptions);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', Settings.tileLayerOptions).addTo(this.map);
     this.layerGroup = L.layerGroup().addTo(this.map);
-    this.routeLayerGroup = L.layerGroup().addTo(this.map);
-    this.trackLayerGroup = L.layerGroup().addTo(this.map);
+    this.historyShipMarkerLayerGroup = L.layerGroup().addTo(this.map);
+    this.historyTrackLayerGroup = L.layerGroup().addTo(this.map);
     return this.map;
   }
 
   openTimeline(mmsi: string) {
     this.apiService.track(mmsi).subscribe(
       trackObj => {
-        this.addShipTrackToRouteLayer(trackObj.tracks[0]);
-        this.createTimeline(trackObj.tracks[0]);
+        this.addShipHistoryTrackToRouteLayer(trackObj.tracks[0]);
+        this.timeline = createTimeline(trackObj.tracks[0]);
         this.addHistoryMarker(null);
       }
     );
   }
 
-  addShipTrackToRouteLayer(rawTrack) {
-    const plist = rawTrack.intervalPoints.map((v) => new L.LatLng(v.lat, v.lon));
-    L.polyline(plist, {
-      color: 'red',
-      weight: 3,
-      opacity: 0.5,
-      smoothFactor: 1
-    }).addTo(this.routeLayerGroup);
+  addShipHistoryTrackToRouteLayer(rawTrack) {
+    shipHistoryTrack(rawTrack).addTo(this.historyShipMarkerLayerGroup);
   }
 
   handleClick() {
@@ -160,46 +148,36 @@ export class MapService {
     this.map.off('click');
   }
 
-  markerOnClick(e) {
+  onMarkerClick(e) {
+    this.selectShip(e.target.data.mmsi);
+  }
+
+  selectShip(mmsi) {
     this.resetHistory();
-    this.map.panTo(new L.LatLng(e.target.data.latLng.lat, e.target.data.latLng.lng));
-    this.shipSelected = this.visibleShipsData[e.target.data.mmsi];
-  }
-
-  private createTimeline(track: any) {
-    const trackDates = track.intervalPoints.map((v) => [this.roundTimestamp(v.msgt), new L.LatLng(v.lat, v.lon), v.sog]);
-    const dates = new Set();
-    const filtered = trackDates.filter(trac => {
-      if (dates.has(trac[0])) {
-        return false;
-      }
-      dates.add(trac[0]);
-      return true;
-    });
-    this.timeline = filtered;
-  }
-
-  private roundDate(date, minutes = 30) {
-    const coeff = 1000 * 60 * minutes;
-    return new Date(Math.round(Date.parse(date) / coeff) * coeff);
-  }
-
-  private roundTimestamp(date, minutes = 5) {
-    const coeff = 1000 * 60 * minutes;
-    return Math.round(Date.parse(date) / coeff) * coeff;
+    this.shipSelected = this.visibleShipsData[mmsi];
+    const coordinates = this.shipSelected.geometry.coordinates;
+    this.map.panTo(new L.LatLng(coordinates[1], coordinates[0]));
   }
 
   public resetHistory() {
     this.historyRouteMarker = null;
-    this.trackLayerGroup.clearLayers();
-    this.routeLayerGroup.clearLayers();
+    this.historyTrackLayerGroup.clearLayers();
+    this.historyShipMarkerLayerGroup.clearLayers();
   }
 
-  showRectangle({minX, maxX, minY, maxY}) {
+  showAreaRectangle({minX, maxX, minY, maxY}) {
     const bounds = L.latLngBounds(L.latLng(minY, minX), L.latLng(maxY, maxX));
     const rectangle =  L.rectangle(bounds, {color: '#ff7800', weight: 1});
     rectangle.addTo(this.map);
     setTimeout(() => rectangle.remove(), 3000);
+  }
+
+  enableDrag() {
+    this.map.dragging.enable();
+  }
+
+  disableDrag() {
+    this.map.dragging.disable();
   }
 }
 

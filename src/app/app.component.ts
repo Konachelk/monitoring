@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Map } from 'leaflet';
 import { MapService } from './services/map.service';
-
+import { shipImage } from './services/ship-image-url';
+import { shipProperties } from './services/ship-properties';
 
 
 @Component({
@@ -10,7 +10,8 @@ import { MapService } from './services/map.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  private map: Map;
+
+  shipProperties = shipProperties;
   minDate;
   maxDate;
   step = 1000 * 60 * 5;
@@ -19,17 +20,19 @@ export class AppComponent implements OnInit {
   shipSelected;
   sog;
   time;
+  url = 'https://i.ibb.co/RvQ8Xsj/Bev-Qj1638662845.jpg';
 
-   nazwa = [['MMSI', 'mmsi'], ['Ship name', 'name'], ['Call sign', 'callsign'], ['Country', 'country'], ['Destination', 'destination'], ['Ship type', 'shipType'], ['ETA', 'eta']];
-
-  constructor(public mapService: MapService) {
-  }
+  constructor(public mapService: MapService) {}
 
   ngOnInit() {
-    this.map = this.mapService.renderMap('map-container');
+    this.mapService.renderMap('map-container');
     this.mapService.getPositions();
     this.mapService.timeline$.subscribe(timeline => this.setTimeline(timeline));
-    this.mapService.shipSelected$.subscribe(ship => {this.shipSelected = ship; this.showTimeline = false; });
+    this.mapService.shipSelected$.subscribe(ship => {
+      this.shipSelected = ship;
+      this.showTimeline = false;
+      this.url = shipImage(ship.mmsi);
+    });
   }
 
   setTimeline(timeline) {
@@ -39,19 +42,11 @@ export class AppComponent implements OnInit {
       sog.push(new Date(t[0]));
       time.push(t[2]);
     });
-    this.sog = [{data: time}];
-    this.time = sog;
+    this.time = [{data: time}];
+    this.sog = sog;
     this.maxDate  = timeline[timeline.length - 1][0];
     this.minDate = timeline[0][0];
     this.historyDate = new Date(timeline[0][0]);
-  }
-
-  drawCircle() {
-    this.mapService.handleClick();
-  }
-
-  stopDrawCircle() {
-    this.mapService.unhookClick();
   }
 
   showRouteHistory(e) {
@@ -67,13 +62,5 @@ export class AppComponent implements OnInit {
       this.mapService.openTimeline(mmsi);
     }
     this.showTimeline = !this.showTimeline;
-  }
-
-  enableDrag() {
-    this.map.dragging.enable();
-  }
-
-  disableDrag() {
-    this.map.dragging.disable();
   }
 }
