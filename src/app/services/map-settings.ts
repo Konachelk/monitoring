@@ -5,7 +5,7 @@ import { TileLayerOptions } from 'leaflet';
 const bounds: L.LatLngBounds = L.latLngBounds(L.latLng(45, -10), L.latLng(80.0, 50.0));
 
 export const initMapOptions: MapOptions = {
-  center: [65.45, 9.53],
+  center: [63.45, 9.53],
   minZoom: 5,
   maxZoom: 15,
   zoom: 7,
