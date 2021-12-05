@@ -1,2 +1,2 @@
 # monitoring
-npm install
+npm install && ng serve
