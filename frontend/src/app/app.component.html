@@ -7,7 +7,7 @@
 </div>
 <div class="panel-admin">
   <mat-card  class="example-card">
-    <div #shipImage [ngStyle]="{'background-imaggit ae': 'url(' + url + ')'}"  class="ship-image"></div>
+    <div #shipImage [ngStyle]="{'background-image': 'url(' + url + ')'}"  class="ship-image"></div>
     <mat-card-content class="container">
       <p *ngFor="let part of [[0,3], [3,5], [5,7]]">
         <app-ship-detail-card class='detail'
